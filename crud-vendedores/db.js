@@ -1,13 +1,14 @@
 const mysql = require("mysql2/promise");
 
 const pool = mysql.createPool({
-  host: "localhost",
+  host: "caboose.proxy.rlwy.net",
   user: "root",
-  password: "",
+  password: "ozhEgsmoHBvULgsgiYOzWpMZphtRUMRT",
   database: "ventas",
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
+  port: 19366
 });
 
 // Función para probar la conexión
