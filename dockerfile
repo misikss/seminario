@@ -4,17 +4,21 @@ FROM node:18
 # Crear directorio de la app
 WORKDIR /app
 
-# Copiar archivos de dependencias
+# Copiar package.json y package-lock.json
 COPY package*.json ./
 
 # Instalar dependencias
 RUN npm install
 
-# Copiar el resto del código
+# Copiar todos los archivos del proyecto
 COPY . .
 
-# Exponer el puerto (ajústalo según tu app)
+# Listar contenido para depuración
+RUN ls -la
+RUN ls -la crud-vendedores
+
+# Exponer el puerto
 EXPOSE 3000
 
-# Comando para ejecutar la app
-CMD ["npm", "start"]
+# Comando para ejecutar la app desde la subcarpeta
+CMD ["node", "crud-vendedores/app.js"]

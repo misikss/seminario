@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
   res.redirect("/vendedores");
 });
 
-// Iniciar servidor
-app.listen(port, () => {
+// Iniciar servidor - modificado para escuchar en todas las interfaces
+app.listen(port, '0.0.0.0', () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 });
