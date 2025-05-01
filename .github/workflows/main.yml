@@ -1,34 +1,48 @@
-name: CI básico
-# Eventos que activan el workflow
+name: Deploy App Node.js con Docker
+
+
+
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  # También se puede ejecutar manualmente desde la interfaz de GitHub
-  workflow_dispatch:
-# Trabajos que ejecutará este workflow
+
+ push:
+
+  branches: [ main ]
+
+
+
 jobs:
-  # Un trabajo llamado "build"
-  build:
-    # Se ejecutará en la última versión de Ubuntu
-    runs-on: ubuntu-latest
-    # Pasos del trabajo
-    steps:
-      # Paso 1: Obtener el código del repositorio
-      - name: Checkout del código
-        uses: actions/checkout@v3
-      # Paso 2: Configurar Node.js
-      - name: Configurar Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '22'          
-      # Paso 3: Instalar dependencias
-      - name: Instalar dependencias
-        run: npm ci        
-      # Paso 4: Ejecutar pruebas
-      - name: Ejecutar pruebas
-        run: npm test        
-      # Paso 5: Construir la aplicación
-      - name: Construir proyecto
-        run: npm run build
+
+ deploy:
+
+  runs-on: ubuntu-latest
+
+  
+
+  steps:
+
+   - name: Checkout el código
+
+    uses: actions/checkout@v4
+
+
+
+   - name: Instalar Docker
+
+    uses: docker/setup-buildx-action@v3
+
+
+
+   - name: Construir imagen Docker
+
+    run: docker build -t myapp:latest .
+
+
+
+   - name: Correr contenedor Docker
+
+    run: docker run -d -p 3000:3000 myapp:latest
+
+
+
+Mensaje
+Editor de texto
